@@ -1,30 +1,10 @@
+.container{
+	width: 970px;
+}
+
 body {
     margin: 20px;
     font-family: 'Mukta', sans-serif;
-}
-form {
-    width: 400px;
-}
-
-/* // workaround */
-.intl-tel-input {
-display: table-cell;
-}
-.intl-tel-input .selected-flag {
-z-index: 4;
-}
-.intl-tel-input .country-list {
-z-index: 5;
-}
-.input-group .intl-tel-input .form-control {
-border-top-left-radius: 4px;
-border-top-right-radius: 0;
-border-bottom-left-radius: 4px;
-border-bottom-right-radius: 0;
-}
-
-#newsform {
-    width: 800px;
 }
 
 /* NAVBAR CSS - Inspiration from https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=beautiful-navbar-with-menu-icons*/
@@ -200,4 +180,17 @@ border-bottom-right-radius: 0;
 
 .maininventorytable{
 	padding: 10px;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
 }

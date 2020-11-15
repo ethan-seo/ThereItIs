@@ -47,7 +47,7 @@ class Item(models.Model):
     productname = models.CharField(max_length=50)
     productdesc = models.TextField()
     quanity = models.IntegerField()
-    location = models.CharField(choices=LOCATION_CHOICES,blank=True)
+    location = models.CharField(max_length=50, choices=LOCATION_CHOICES,blank=True)
     expiration_date = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -56,7 +56,7 @@ TRANSACTION_TYPE = (("ADD","ADD"),("REMOVE","REMOVE"))
 
 class Transaction(models.Model):
     notes = models.CharField(max_length=255,blank=True, null=True)
-    transaction_type = models.CharField(choices=TRANSACTION_TYPE,blank=True)
+    transaction_type = models.CharField(max_length=50, choices=TRANSACTION_TYPE,blank=True)
     update_user = models.ForeignKey(User, related_name='transaction_user', on_delete=models.CASCADE)
     updated_item = models.ForeignKey(Item, related_name="transaction_item", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

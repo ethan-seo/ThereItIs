@@ -3,34 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    {% load static %}
-    <link href="static/bootstrap.min.css" rel="stylesheet">
+    <title>Edit Profile</title>
 </head>
 <body>
+    
     <div class="container">
 
-        <div class="thereitis">
-            <h2>ThereItIs!</h2>
-        </div>
-
-        <div class="loginform">
-            <h1>Login</h1>
-            <form action="/login" method=POST>
+        <div class="editprofike">
+            <h3>Edit Your Info:</h3>
+            <form action="/edituser/{{user.id}}" method=POST>
                 {% csrf_token %}
-                Email: <input type="text" name='email'>
-                Password: <input type="password" name='password'>
-                <input type="submit" value='Login'>
+                First Name: <input type="text" name='firstname' value={{user.firstname}}>
+                Last Name: <input type="text" name='lastname' value={{user.lastname}}>
+                Email: <input type="text" name='email' value={{user.email}}>
+                Password: <input type="text" name='lastname' value={{user.password}}>
+                Confirm Password: <input type="text" name='email' value={{user.passwordconf}}>
+                <input type="submit">
             </form>
-        </div>
-
-        <div class="notregistered">
-            <a href="/regpage">Not registered? Register now</a>
         </div>
 
     </div>
 
-    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Quantity Items</title>
+    {% load static %}
+    <link href="static/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    
+    <div class="container">
+
+        <div>
+            <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+                <a href="/home" class="navbar-brand"><i class="fa fa-paper-plane-o"></i><b> ThereItIs</b></a>  		
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Collection of nav links, forms, and other content for toggling -->
+                <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
+                    <form class="navbar-form form-inline">
+                        <div class="input-group search-box">								
+                            <input type="text" id="search" class="form-control" placeholder="Search here...">
+                            <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                        </div>
+                    </form>
+                    <div class="navbar-nav ml-auto">
+                        <a href="/dashboard" class="nav-item nav-link active"><i class="fa fa-home"></i><span> Home</span></a>
+                        <a href="/inventory" class="nav-item nav-link"><i class="fa fa-list-alt"></i><span> Inventory</span></a>
+                        <a href="/orders" class="nav-item nav-link"><i class="fa fa-tasks"></i><span> Orders</span></a>
+                        <a href="/transactions" class="nav-item nav-link"><i class="fa fa-history"></i><span> Transactions</span></a>
+                        <div class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i class="fa fa-user-circle-o"></i><b class="caret"></b></a>
+                            <div class="dropdown-menu">
+                                <a href="/viewuser" class="dropdown-item"><i class="fa fa-address-card-o"></i> View Profile</a>
+                                <a href="/edituser" class="dropdown-item"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
+                                <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                                <div class="divider dropdown-divider"></div>
+                                <a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="mainheader">
+            <h1>View Low Quantity Inventory</h1>
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="static/js/bootstrap.min.js"></script>
+</body>
+</html>

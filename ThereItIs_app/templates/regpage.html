@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Registration</title>
     {% load static %}
     <link href="static/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    
     <div class="container">
 
         <div class="thereitis">
             <h2>ThereItIs!</h2>
         </div>
 
-        <div class="loginform">
-            <h1>Login</h1>
-            <form action="/login" method=POST>
+        <div class="registerform">
+            <h1>Register</h1>
+            <form action="/register" method=POST>
                 {% csrf_token %}
+                <h4>Personal Info</h4>
+                First Name: <input type="text" name='firstname'>
+                Last Name: <input type="text" name='lastname'>
                 Email: <input type="text" name='email'>
                 Password: <input type="password" name='password'>
-                <input type="submit" value='Login'>
+                Confirm Password: <input type="password" name='password_conf'>
+                <input type="submit" value='Register'>
             </form>
-        </div>
-
-        <div class="notregistered">
-            <a href="/regpage">Not registered? Register now</a>
         </div>
 
     </div>
 
-    
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

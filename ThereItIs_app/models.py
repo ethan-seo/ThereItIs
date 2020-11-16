@@ -17,6 +17,9 @@ class UserManager(models.Manager):
             errors['password'] = "Passwords must be at least 8 characters"
         if reqPOST['password'] != reqPOST['password_conf']:
             errors['password_conf'] = "Passwords need to match"
+        email_check = self.filter(email=reqPOST['email'])
+        if email_check:
+            errors['email'] = "Email already in use"    
         if not EMAIL_REGEX.match(reqPOST["email"]):
             errors['regex'] = "Email is not in correct format"
         return errors
@@ -28,6 +31,9 @@ class UserManager(models.Manager):
             errors["req_fields"] = "All Fields are required"
         if not EMAIL_REGEX.match(reqPOST["email"]):
             errors['regex'] = "Email is not in correct format"
+        email_check = self.filter(email = reqPOST['email'])
+        if len(email_check)==0:
+            errors['email'] = "Account does not exist!"
         return errors
 
 

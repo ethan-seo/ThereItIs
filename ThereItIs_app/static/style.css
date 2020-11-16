@@ -1,9 +1,9 @@
-body {
+/* body {
     margin: 20px;
 }
 form {
     width: 400px;
-}
+} */
 
 /* // workaround */
 .intl-tel-input {
@@ -24,4 +24,16 @@ border-bottom-right-radius: 0;
 
 #newsform {
     width: 800px;
+}
+/* Align href on login/registration page to the center */
+.logregtext{
+    text-align: center;
+}
+
+.logreg .btn{
+    display: flex;
+    justify-content: center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:25px;
 }

@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
+# from django.views.generic import UpdateView
+# from .forms import *
 from .models import User, Item, Transaction
 from django.contrib import messages
 import bcrypt
 
 # Create your views here.
+
 def index(request):
     return redirect('/user/loginpage')
     
@@ -11,7 +14,7 @@ def loginpage(request):
     return render(request, 'loginpage.html')
 
 def regpage(request):
-    return render(request, 'registrationpage.html')
+    return render(request, 'regpage.html')
 
 def register(request):
     if request.method == "POST":
@@ -19,13 +22,17 @@ def register(request):
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
-            return redirect('/')
+            return redirect('/user/regpage')
         else:
             #create an account for our User
             hashed_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
-            user = User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], password=hashed_pw)
+            user = User.objects.create(
+                first_name=request.POST['first_name'], 
+                last_name=request.POST['last_name'], 
+                email=request.POST['email'], 
+                password=hashed_pw)
             request.session['user_id'] = user.id
-            return redirect('/dashboard') #the main page of the application
+            return redirect('/user/dashboard') #the main page of the application
     return redirect(request, '/')
 
 def login(request):

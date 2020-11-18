@@ -36,29 +36,40 @@
                         </div>
                     </form>
                     <div class="navbar-nav ml-auto">
-                        <a href="/dashboard" class="nav-item nav-link active"><i class="fa fa-home"></i><span>
-                                Home</span></a>
-                        <a href="/inventory" class="nav-item nav-link"><i class="fa fa-list-alt"></i><span>
-                                Inventory</span></a>
-                        <a href="/orders" class="nav-item nav-link"><i class="fa fa-tasks"></i><span> Orders</span></a>
-                        <a href="/transactions" class="nav-item nav-link"><i class="fa fa-history"></i><span>
-                                Transactions</span></a>
+                        {% if current_page == "dashboard" %}
+                        <a href="/user/dashboard" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
+                        {% else %}
+                        <a href="/user/dashboard" class="nav-item nav-link"><i class="fa fa-home"></i><span>Home</span></a>
+                        {% endif %}
+                        {% if current_page == "inventory" %}
+                        <a href="/item/inventory" class="nav-item nav-link active"><i class="fa fa-list-alt"></i><span> Inventory</span></a>
+                        {% else %}
+                        <a href="/item/inventory" class="nav-item nav-link"><i class="fa fa-list-alt"></i><span> Inventory</span></a>
+                        {% endif %}
+                        {% if current_page == "order" %}
+                        <a href="/item/orderpage" class="nav-item nav-link active"><i class="fa fa-tasks"></i><span> Orders</span></a>
+                        {% else %}
+                        <a href="/item/orderpage" class="nav-item nav-link"><i class="fa fa-tasks"></i><span> Orders</span></a>
+                        {% endif %}
+                        {% if current_page == "transaction" %}
+                        <a href="/item/transactionpage" class="nav-item nav-link active"><i class="fa fa-history"></i><span> Transactions</span></a>
+                        {% else %}
+                        <a href="/item/transactionpage" class="nav-item nav-link"><i class="fa fa-history"></i><span> Transactions</span></a>
+                        {% endif %}
                         <div class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i
                                     class="fa fa-user-circle-o"></i><b class="caret"></b></a>
                             <div class="dropdown-menu">
-                                <a href="/viewuser" class="dropdown-item"><i class="fa fa-address-card-o"></i> View
+                                <a href="/user/edituser" class="dropdown-item"><i class="fa fa-address-card-o"></i> Edit
                                     Profile</a>
-                                <a href="/edituser" class="dropdown-item"><i class="fa fa-pencil-square-o"></i> Edit
-                                    Profile</a>
-                                <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
                                 <div class="divider dropdown-divider"></div>
-                                <a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                                <a href="/user/logout" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
+            <p></p>
         </div>
 
 

@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-# from django.views.generic import UpdateView
-# from .forms import *
-from .models import User, Item, Transaction
+from .forms import AddItemForm
+from .models import *
 from django.contrib import messages
 import bcrypt
 
@@ -155,15 +154,28 @@ def deleteitem(request, id):
         item_to_delete.delete()
     return redirect('/item/viewitems')
 
+def additem_form(request):
+    form = AddItemForm()
+    context={
+        'form':form
+    }
+    return render(request,"add_item.html",context)
 def additem(request):
+    print("add item initiated")
     if request.method == "POST":
-        # errors = Item.objects.create_validator(request.POST)
-        # if len(errors) > 0:
-        #     for key, value in errors.items():
-        #         messages.error(request, value)
-        #     return redirect('/item/viewitems)
-        new_item = Item.objects.create(sku=request.POST['sku'], productname=request.POST['productname'], productdesc=request.POST['productdesc'], quanity=request.POST['quanity'], location=request.POST['location'])
-    return redirect('/item/viewitems')
+        print("form method is post")
+        form = AddItemForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            print("Valid Form Saving")
+            form.save()
+            return redirect('/item/inventory')
+        else:
+            print("Form is invalid")
+        
+    return render(request, 'add_item.html',{'form':form})
+    
+    
+
 
 def addstock(request, id):
     if request.method == "POST":
@@ -173,5 +185,5 @@ def addstock(request, id):
         #         messages.error(request, value)
         #     return redirect('/item/viewitems)
         current_item = Item.objects.get(id=id)
-        new_item = Show.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quanity=request.POST['quanity'], location=request.POST['location'])
+        new_item = Item.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quanity=request.POST['quanity'], location=request.POST['location'])
     return redirect('/item/edititem/'+str(id))

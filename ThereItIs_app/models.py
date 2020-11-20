@@ -52,7 +52,7 @@ class Item(models.Model):
     sku = models.CharField(max_length=50)
     productname = models.CharField(max_length=50)
     productdesc = models.TextField()
-    quanity = models.IntegerField()
+    quantity = models.IntegerField()
     location = models.CharField(max_length=50, choices=LOCATION_CHOICES,blank=True)
     expiration_date = models.DateTimeField(blank=True, null=True)
     mainimage = models.ImageField(upload_to='ThereItIs_app/static/media/', blank=True)

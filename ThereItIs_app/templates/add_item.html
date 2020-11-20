@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,33 +18,39 @@
 </head>
 
 <body>
-    
+
     <div class="container">
 
         <div>
             <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-                <a href="/home" class="navbar-brand"><i class="fa fa-paper-plane-o"></i><b> ThereItIs</b></a>  		
+                <a href="/home" class="navbar-brand"><i class="fa fa-paper-plane-o"></i><b> ThereItIs</b></a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Collection of nav links, forms, and other content for toggling -->
-                <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
+                <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
                     <form class="navbar-form form-inline">
-                        <div class="input-group search-box">								
+                        <div class="input-group search-box">
                             <input type="text" id="search" class="form-control" placeholder="Search here...">
                             <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
                         </div>
                     </form>
                     <div class="navbar-nav ml-auto">
-                        <a href="/dashboard" class="nav-item nav-link active"><i class="fa fa-home"></i><span> Home</span></a>
-                        <a href="/inventory" class="nav-item nav-link"><i class="fa fa-list-alt"></i><span> Inventory</span></a>
+                        <a href="/dashboard" class="nav-item nav-link active"><i class="fa fa-home"></i><span>
+                                Home</span></a>
+                        <a href="/inventory" class="nav-item nav-link"><i class="fa fa-list-alt"></i><span>
+                                Inventory</span></a>
                         <a href="/orders" class="nav-item nav-link"><i class="fa fa-tasks"></i><span> Orders</span></a>
-                        <a href="/transactions" class="nav-item nav-link"><i class="fa fa-history"></i><span> Transactions</span></a>
+                        <a href="/transactions" class="nav-item nav-link"><i class="fa fa-history"></i><span>
+                                Transactions</span></a>
                         <div class="nav-item dropdown">
-                            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i class="fa fa-user-circle-o"></i><b class="caret"></b></a>
+                            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i
+                                    class="fa fa-user-circle-o"></i><b class="caret"></b></a>
                             <div class="dropdown-menu">
-                                <a href="/viewuser" class="dropdown-item"><i class="fa fa-address-card-o"></i> View Profile</a>
-                                <a href="/edituser" class="dropdown-item"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
+                                <a href="/viewuser" class="dropdown-item"><i class="fa fa-address-card-o"></i> View
+                                    Profile</a>
+                                <a href="/edituser" class="dropdown-item"><i class="fa fa-pencil-square-o"></i> Edit
+                                    Profile</a>
                                 <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
                                 <div class="divider dropdown-divider"></div>
                                 <a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
@@ -55,7 +62,25 @@
         </div>
 
         <div class="mainheader">
-            <h1>Add Item</h1>
+            <h1 class="page-title">New Item</h1>
+            <br>
+            <div class="col-6">
+                <form action="/item/additem" method="POST" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    {%for field in form %}
+                    <div class="form-group row">
+                        {{field.errors}}
+                        <label for="id_{{ field.name }}" class="col-3 col-form-label"> {{field.label}}</label>
+                        <div class="col-9">
+                            {{ field }}
+                        </div>
+                    </div>
+
+                    {% endfor%}
+                    <button type="submit" class="btn btn-primary" name="button">Add Item</button>
+
+                </form>
+            </div>
         </div>
 
     </div>
@@ -82,4 +107,5 @@
     <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
     <!--END OF DATA TABLE PLUG-INS-->
 </body>
+
 </html>

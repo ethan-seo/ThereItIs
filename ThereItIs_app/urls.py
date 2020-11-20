@@ -19,5 +19,6 @@ urlpatterns = [
     path('item/transactionpage', views.transactionpage),
     path('item/deleteitem/<int:id>', views.deleteitem),
     path('item/additem', views.additem),
+    path('item/additem_form', views.additem_form),
     path('item/addstock/<int:id>', views.addstock),
 ]

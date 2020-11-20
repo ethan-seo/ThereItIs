@@ -1,15 +1,9 @@
-# from django import forms
-# from crispy_forms.helper import FormHelper
-# from crispy_forms.layout import Submit
-# from .models import User
+from django import forms
 
-# class RegistrationForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ('first_name','last_name','email','password')
+from .models import *
 
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.helper = FormHelper()
-#         self.helper.form_method="post"
-#         self.helper.add_input(Submit('submit','Register'))
+class AddItemForm(forms.ModelForm):
+
+    class Meta:
+        model = Item
+        fields = ('mainimage','sku','productname','productdesc','quantity','location','expiration_date')

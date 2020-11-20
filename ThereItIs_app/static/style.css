@@ -3,6 +3,9 @@
     text-align: center;
 }
 
+.page-title{
+    text-align: center;
+}
 .logreg .btn{
     display: flex;
     justify-content: center;

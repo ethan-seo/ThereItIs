@@ -6,4 +6,4 @@ class AddItemForm(forms.ModelForm):
 
     class Meta:
         model = Item
-        fields = ('sku','productname','productdesc','quantity','location','expiration_date')
+        fields = ('mainimage','sku','productname','productdesc','quantity','location','expiration_date')

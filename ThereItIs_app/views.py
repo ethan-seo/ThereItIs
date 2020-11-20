@@ -154,19 +154,26 @@ def deleteitem(request, id):
         item_to_delete.delete()
     return redirect('/item/viewitems')
 
+def additem_form(request):
+    form = AddItemForm()
+    context={
+        'form':form
+    }
+    return render(request,"add_item.html",context)
 def additem(request):
+    print("add item initiated")
     if request.method == "POST":
-        form = AddItemForm(request.POST)
+        print("form method is post")
+        form = AddItemForm(request.POST or None, request.FILES or None)
         if form.is_valid():
+            print("Valid Form Saving")
             form.save()
+            return redirect('/item/inventory')
+        else:
+            print("Form is invalid")
         
-        return redirect('/item/inventory')
-    else:
-        form = AddItemForm()
-        context={
-            'form':form
-        }
-        return render(request,"add_item.html",context)
+    return render(request, 'add_item.html',{'form':form})
+    
     
 
 

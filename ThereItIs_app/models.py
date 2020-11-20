@@ -55,8 +55,13 @@ class Item(models.Model):
     quanity = models.IntegerField()
     location = models.CharField(max_length=50, choices=LOCATION_CHOICES,blank=True)
     expiration_date = models.DateTimeField(blank=True, null=True)
+    mainimage = models.ImageField(upload_to='ThereItIs_app/static/media/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.productname
+
 
 TRANSACTION_TYPE = (("ADD","ADD"),("REMOVE","REMOVE"))
 

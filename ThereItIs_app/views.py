@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-# from django.views.generic import UpdateView
-# from .forms import *
-from .models import User, Item, Transaction
+from .forms import AddItemForm
+from .models import *
 from django.contrib import messages
 import bcrypt
 
@@ -157,13 +156,19 @@ def deleteitem(request, id):
 
 def additem(request):
     if request.method == "POST":
-        # errors = Item.objects.create_validator(request.POST)
-        # if len(errors) > 0:
-        #     for key, value in errors.items():
-        #         messages.error(request, value)
-        #     return redirect('/item/viewitems)
-        new_item = Item.objects.create(sku=request.POST['sku'], productname=request.POST['productname'], productdesc=request.POST['productdesc'], quanity=request.POST['quanity'], location=request.POST['location'])
-    return redirect('/item/viewitems')
+        form = AddItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+        
+        return redirect('/item/inventory')
+    else:
+        form = AddItemForm()
+        context={
+            'form':form
+        }
+        return render(request,"add_item.html",context)
+    
+
 
 def addstock(request, id):
     if request.method == "POST":
@@ -173,5 +178,5 @@ def addstock(request, id):
         #         messages.error(request, value)
         #     return redirect('/item/viewitems)
         current_item = Item.objects.get(id=id)
-        new_item = Show.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quanity=request.POST['quanity'], location=request.POST['location'])
+        new_item = Item.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quanity=request.POST['quanity'], location=request.POST['location'])
     return redirect('/item/edititem/'+str(id))

@@ -55,8 +55,26 @@
         </div>
 
         <div class="mainheader">
-            <h1>Add Item</h1>
+            <h1 class="page-title">New Item</h1>
+            <br>
+            <div class="col-6">
+            <form action="/item/additem" method="post">
+                {%csrf_token%}
+                {%for field in form %}
+        <div class="form-group row">
+            {{field.errors}}
+            <label for="id_{{ field.name }}" class="col-3 col-form-label"> {{field.label}}</label>
+            <div class="col-9">
+                {{ field }}
+            </div>
         </div>
+
+        {% endfor%}
+        <button type="submit" class="btn btn-primary" name="button">Add Item</button>
+
+            </form>
+        </div>
+    </div>
 
     </div>
 

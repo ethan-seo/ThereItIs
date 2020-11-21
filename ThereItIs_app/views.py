@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import AddItemForm
+from .forms import ItemForm
 from .models import *
 from django.contrib import messages
 import bcrypt
@@ -112,29 +112,53 @@ def updateuser(request):
         user_to_update.save()
     return redirect('/user/edituser')
 
-def edititem(request, id):
-    context = {
-        'user': User.objects.get(id=request.session['user_id']),
-        "item": Item.objects.get(id=id),
-        'current_page': "inventory",
-    }
-    return render(request, 'itemedit.html', context)
+def add_item(request):
+    #validate user login
+    if 'user_id' not in request.session:
+        return redirect('/')
+    # save data if user posts
+    if request.method=="POST":
+        print("form method is post")
+        form = ItemForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            print("Valid Form Saving")
+            form.save()
+            return redirect('/item/inventory')
+        else:
+            print("Form is invalid")
+            return redirect('/item/add')
+    else:
+        form = ItemForm()
+        context={
+            'form':form
+        }
+        return render(request,"add_item.html",context)
 
-def updateitem(request, id):
-    if request.method == "POST":
-        # errors = Item.objects.create_validator(request.POST)
-        # if len(errors) > 0:
-        #     for key, value in errors.items():
-        #         messages.error(request, value)
-        #     return redirect('/item/edititem/'+str(id))
-        item_to_update = Item.objects.get(id=id)
-        item_to_update.sku = request.POST['sku']
-        item_to_update.productname = request.POST['productname']
-        item_to_update.productdesc = request.POST['productdesc']
-        item_to_update.quanity = request.POST['quanity']
-        item_to_update.location = request.POST['location']
-        item_to_update.save()
-    return redirect('/item/edititem/'+str(id))
+def edit_item(request, id):
+    #validate user login
+    if 'user_id' not in request.session:
+        return redirect('/')
+    #validate item
+    item_exists = Item.objects.filter(id=id)
+    if len(item_exists)>0:
+        item = Item.objects.get(id=id)
+        # save updates to item
+        if request.method == "POST":
+            form = ItemForm(request.POST, request.FILES, instance=item)
+            if form.is_valid():
+                form.save()
+                return redirect('/item/inventory')
+            else:
+                return redirect(f'item/edit/{id}')
+        else:
+            form = ItemForm(instance=item)
+            context = {
+                'item':item,
+                'form':form
+            }
+            return render(request,'edit_item.html',context)
+    return ('/item/inventory')
+
 
 def orderpage(request):
     if 'user_id' not in request.session:
@@ -164,28 +188,6 @@ def deleteitem(request, id):
         item_to_delete.delete()
     return redirect('/item/viewitems')
 
-def additem_form(request):
-    form = AddItemForm()
-    context={
-        'form':form
-    }
-    return render(request,"add_item.html",context)
-def additem(request):
-    print("add item initiated")
-    if request.method == "POST":
-        print("form method is post")
-        form = AddItemForm(request.POST or None, request.FILES or None)
-        if form.is_valid():
-            print("Valid Form Saving")
-            form.save()
-            return redirect('/item/inventory')
-        else:
-            print("Form is invalid")
-        
-    return render(request, 'add_item.html',{'form':form})
-    
-    
-
 
 def addstock(request, id):
     if request.method == "POST":
@@ -197,3 +199,22 @@ def addstock(request, id):
         current_item = Item.objects.get(id=id)
         new_item = Item.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quanity=request.POST['quanity'], location=request.POST['location'])
     return redirect('/item/edititem/'+str(id))
+
+
+    #############DELETE######################
+def updateitem(request, id):
+    if request.method == "POST":
+        # errors = Item.objects.create_validator(request.POST)
+        # if len(errors) > 0:
+        #     for key, value in errors.items():
+        #         messages.error(request, value)
+        #     return redirect('/item/edititem/'+str(id))
+        item_to_update = Item.objects.get(id=id)
+        item_to_update.sku = request.POST['sku']
+        item_to_update.productname = request.POST['productname']
+        item_to_update.productdesc = request.POST['productdesc']
+        item_to_update.quanity = request.POST['quanity']
+        item_to_update.location = request.POST['location']
+        item_to_update.save()
+    return redirect('/item/edititem/'+str(id))
+############DELETE###################

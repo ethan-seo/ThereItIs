@@ -1,24 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Inventory</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <!-- <link href="static/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.gstatic.com" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body>
+    
+    <div class="container">
 
-    <div class="container"></div>>
+        <div class="mainnavbar">
+            <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+                <a href="#" class="navbar-brand"><i class="fa fa-paper-plane-o"></i><b> ThereItIs</b></a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Collection of nav links, forms, and other content for toggling -->
+                <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+                    <form class="navbar-form form-inline">
+                        <div class="input-group search-box">
+                            <input type="text" id="search" class="form-control" placeholder="Search here...">
+                            <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                        </div>
+                    </form>
+                    <div class="navbar-nav ml-auto">
+                        {% if current_page == "dashboard" %}
+                        <a href="/user/dashboard" class="nav-item nav-link active"><i
+                                class="fa fa-home"></i><span>Home</span></a>
+                        {% else %}
+                        <a href="/user/dashboard" class="nav-item nav-link"><i
+                                class="fa fa-home"></i><span>Home</span></a>
+                        {% endif %}
+                        {% if current_page == "inventory" %}
+                        <a href="/item/inventory" class="nav-item nav-link active"><i class="fa fa-list-alt"></i><span>
+                                Inventory</span></a>
+                        {% else %}
+                        <a href="/item/inventory" class="nav-item nav-link"><i class="fa fa-list-alt"></i><span>
+                                Inventory</span></a>
+                        {% endif %}
+                        {% if current_page == "order" %}
+                        <a href="/item/orderpage" class="nav-item nav-link active"><i class="fa fa-tasks"></i><span>
+                                Orders</span></a>
+                        {% else %}
+                        <a href="/item/orderpage" class="nav-item nav-link"><i class="fa fa-tasks"></i><span>
+                                Orders</span></a>
+                        {% endif %}
+                        {% if current_page == "transaction" %}
+                        <a href="/item/transactionpage" class="nav-item nav-link active"><i
+                                class="fa fa-history"></i><span> Transactions</span></a>
+                        {% else %}
+                        <a href="/item/transactionpage" class="nav-item nav-link"><i class="fa fa-history"></i><span>
+                                Transactions</span></a>
+                        {% endif %}
+                        <div class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i
+                                    class="fa fa-user-circle-o"></i><b class="caret"></b></a>
+                            <div class="dropdown-menu">
+                                <a href="user/viewuser" class="dropdown-item"><i class="fa fa-address-card-o"></i> View
+                                    Profile</a>
+                                <a href="/user/edituser" class="dropdown-item"><i class="fa fa-pencil-square-o"></i>
+                                    Edit
+                                    Profile</a>
+                                <div class="divider dropdown-divider"></div>
+                                <a href="/user/logout" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
+                                    Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
 
+        {%block content%}
 
+        
+        {% endblock %}
+        
+
+    </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -41,7 +111,5 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
     <!--END OF DATA TABLE PLUG-INS-->
-    
 </body>
-
 </html>

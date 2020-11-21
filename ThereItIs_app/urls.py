@@ -20,6 +20,7 @@ urlpatterns = [
     path('item/transactionpage', views.transactionpage),
     path('item/deleteitem/<int:id>', views.deleteitem),
     path('item/add', views.add_item),
+    path('item/viewitem/<int:id>', views.viewitem),
     # path('item/additem_form', views.additem_form),
     path('item/addstock/<int:id>', views.addstock),
 ]

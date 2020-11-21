@@ -154,11 +154,22 @@ def edit_item(request, id):
             form = ItemForm(instance=item)
             context = {
                 'item':item,
-                'form':form
+                'form':form,
             }
             return render(request,'edit_item.html',context)
     return ('/item/inventory')
 
+def viewitem(request, id):
+    if 'user_id' not in request.session:
+        messages.error(request, "You need to register or log in!")
+        return redirect('/')
+    item = Item.objects.get(id=id)
+    context = {
+        "user": User.objects.get(id=request.session['user_id']),
+        'current_page': "inventory",
+        'item':item,
+    }
+    return render(request,'viewitem.html',context)
 
 def orderpage(request):
     if 'user_id' not in request.session:

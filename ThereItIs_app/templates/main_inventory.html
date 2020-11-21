@@ -20,54 +20,67 @@
     
     <div class="container">
 
-        <div>
+        <div class="mainnavbar">
             <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-                <a href="/home" class="navbar-brand"><i class="fa fa-paper-plane-o"></i><b> ThereItIs</b></a>  		
+                <a href="/home" class="navbar-brand"><i class="fa fa-paper-plane-o"></i><b> ThereItIs</b></a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Collection of nav links, forms, and other content for toggling -->
-                <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">		
+                <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
                     <form class="navbar-form form-inline">
-                        <div class="input-group search-box">								
+                        <div class="input-group search-box">
                             <input type="text" id="search" class="form-control" placeholder="Search here...">
                             <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
                         </div>
                     </form>
                     <div class="navbar-nav ml-auto">
                         {% if current_page == "dashboard" %}
-                        <a href="/user/dashboard" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
+                        <a href="/user/dashboard" class="nav-item nav-link active"><i
+                                class="fa fa-home"></i><span>Home</span></a>
                         {% else %}
-                        <a href="/user/dashboard" class="nav-item nav-link"><i class="fa fa-home"></i><span>Home</span></a>
+                        <a href="/user/dashboard" class="nav-item nav-link"><i
+                                class="fa fa-home"></i><span>Home</span></a>
                         {% endif %}
                         {% if current_page == "inventory" %}
-                        <a href="/item/inventory" class="nav-item nav-link active"><i class="fa fa-list-alt"></i><span> Inventory</span></a>
+                        <a href="/item/inventory" class="nav-item nav-link active"><i class="fa fa-list-alt"></i><span>
+                                Inventory</span></a>
                         {% else %}
-                        <a href="/item/inventory" class="nav-item nav-link"><i class="fa fa-list-alt"></i><span> Inventory</span></a>
+                        <a href="/item/inventory" class="nav-item nav-link"><i class="fa fa-list-alt"></i><span>
+                                Inventory</span></a>
                         {% endif %}
                         {% if current_page == "order" %}
-                        <a href="/item/orderpage" class="nav-item nav-link active"><i class="fa fa-tasks"></i><span> Orders</span></a>
+                        <a href="/item/orderpage" class="nav-item nav-link active"><i class="fa fa-tasks"></i><span>
+                                Orders</span></a>
                         {% else %}
-                        <a href="/item/orderpage" class="nav-item nav-link"><i class="fa fa-tasks"></i><span> Orders</span></a>
+                        <a href="/item/orderpage" class="nav-item nav-link"><i class="fa fa-tasks"></i><span>
+                                Orders</span></a>
                         {% endif %}
                         {% if current_page == "transaction" %}
-                        <a href="/item/transactionpage" class="nav-item nav-link active"><i class="fa fa-history"></i><span> Transactions</span></a>
+                        <a href="/item/transactionpage" class="nav-item nav-link active"><i
+                                class="fa fa-history"></i><span> Transactions</span></a>
                         {% else %}
-                        <a href="/item/transactionpage" class="nav-item nav-link"><i class="fa fa-history"></i><span> Transactions</span></a>
+                        <a href="/item/transactionpage" class="nav-item nav-link"><i class="fa fa-history"></i><span>
+                                Transactions</span></a>
                         {% endif %}
-                        
                         <div class="nav-item dropdown">
-                            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i class="fa fa-user-circle-o"></i><b class="caret"></b></a>
+                            <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i
+                                    class="fa fa-user-circle-o"></i><b class="caret"></b></a>
                             <div class="dropdown-menu">
-                                <a href="/user/edituser" class="dropdown-item"><i class="fa fa-address-card-o"></i> Edit
+                                <a href="user/viewuser" class="dropdown-item"><i class="fa fa-address-card-o"></i> View
+                                    Profile</a>
+                                <a href="/user/edituser" class="dropdown-item"><i class="fa fa-pencil-square-o"></i>
+                                    Edit
                                     Profile</a>
                                 <div class="divider dropdown-divider"></div>
-                                <a href="/user/logout" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                                <a href="/user/logout" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
+                                    Logout</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
+            <p></p>
         </div>
 
         <div class="mainheader">
@@ -76,6 +89,7 @@
 
         <div class="maininventorytable">
             <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                {% for items in all_items %}
                 <thead>
                     <tr>
                         <th class="th-sm">Select</th>
@@ -89,35 +103,58 @@
                 <tbody>
                     <tr>
                         <td></td>
-                        <td>Tiger</td>
-                        <td>Lion</td>
-                        <td>Bear</td>
-                        <td>Elephant</td>
-                        <td>Cheetah</td>
-                    </tr>
-                    <tr>
                         <td></td>
-                        <td>dsjfbb</td>
-                        <td>Lasfa</td>
-                        <td>Basf</td>
-                        <td>Elephant</td>
-                        <td>Cheetah</td>
-                    </tr>
-                    <tr>
                         <td></td>
-                        <td>Tiger</td>
-                        <td>Lion</td>
-                        <td>Bear</td>
-                        <td>Elephant</td>
-                        <td>Cheetah</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
+                {% endfor %}
             </table>
         </div>
+        
         <br>
         <a href="/item/additem_form">
             <button class="btn btn-primary float-right">Add Item</button>
         </a>
+
+
+        <br>
+        <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
+            <!-- product -->
+            <div class="product-content product-wrap clearfix">
+                <div class="row">
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <div class="product-image">
+                            <img src="" alt="product image" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="product-detail">
+                            <h5 class="name">
+                                <a href="#">
+                                    Item Title 
+                                    <span>SKU: </span>
+                                    <span>Location: </span>
+                                    <span>Quantity: </span>
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="description">
+                            <p>This is the product description </p>
+                        </div>
+                        <div class="product-info smart-form">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <a href="javascript:void(0);" class="btn btn-primary">Add Item</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 

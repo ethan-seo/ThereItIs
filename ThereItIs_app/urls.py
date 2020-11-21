@@ -11,6 +11,7 @@ urlpatterns = [
     path('user/dashboard', views.dashboard),
     path('user/logout', views.logout),
     path('item/inventory', views.inventory),
+    path('user/viewuser', views.viewuser),
     path('user/edituser', views.edituser),
     path('user/updateuser', views.updateuser),
     path('item/edititem/<int:id>', views.edititem),

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link href="static/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="static/bootstrap.min.css" rel="stylesheet"> -->
     <link href="https://fonts.gstatic.com" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
@@ -67,7 +68,7 @@
                             <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i
                                     class="fa fa-user-circle-o"></i><b class="caret"></b></a>
                             <div class="dropdown-menu">
-                                <a href="user/viewuser" class="dropdown-item"><i class="fa fa-address-card-o"></i> View
+                                <a href="/user/viewuser" class="dropdown-item"><i class="fa fa-address-card-o"></i> View
                                     Profile</a>
                                 <a href="/user/edituser" class="dropdown-item"><i class="fa fa-pencil-square-o"></i>
                                     Edit
@@ -84,16 +85,50 @@
         </div>
 
 
-        <div class="editprofike">
-            <h3>Edit Your Info:</h3>
-            <form action="/edituser/{{user.id}}" method=POST>
+        <div class="editprofile">
+            <h3>Edit Your Info {{user.first_name}}:</h3>
+            <form action="/customer/update/{{customer.id}}" method="POST">
                 {% csrf_token %}
-                First Name: <input type="text" name='firstname' value={{user.firstname}}>
-                Last Name: <input type="text" name='lastname' value={{user.lastname}}>
-                Email: <input type="text" name='email' value={{user.email}}>
-                Password: <input type="text" name='lastname' value={{user.password}}>
-                Confirm Password: <input type="text" name='email' value={{user.passwordconf}}>
-                <input type="submit">
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-danger small" id="errors">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+                <div class="form-group row">
+                    <label for="phonenumberinput" class="col-sm-5 col-form-label col-form-label-sm">First Name:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control form-control-sm" name="first_name" value="{{user.first_name}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nameinput" class="col-sm-5 col-form-label col-form-label-sm">Last Name:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control form-control-sm" name="last_name" value="{{user.last_name}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="emailinput" class="col-sm-5 col-form-label col-form-label-sm">Email:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control form-control-sm" name="email" value="{{user.email}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-5 col-form-label col-form-label-sm">Password:</label>
+                    <div class="col-sm-7">
+                        <input type="password" class="form-control form-control-sm" name="password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password_confinput" class="col-sm-5 col-form-label col-form-label-sm">Confirm PW:</label>
+                    <div class="col-sm-7">
+                        <input type="password" class="form-control form-control-sm" name="password_conf">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4"><button type="submit" class="btn btn-primary">Update</button></div>
+            
+                </div>
             </form>
         </div>
 
@@ -115,11 +150,12 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="static/bootstrap.min.js"></script>
+    <!-- <script src="static/bootstrap.min.js"></script> -->
     <!-- FOR DATA TABLES -->
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
     <!--END OF DATA TABLE PLUG-INS-->
 </body>
+
 </html>

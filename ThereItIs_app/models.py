@@ -42,6 +42,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=40)
     email = models.CharField(max_length=50)
     password = models.TextField()
+    profile_image = models.ImageField(upload_to='ThereItIs_app/static/media/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()

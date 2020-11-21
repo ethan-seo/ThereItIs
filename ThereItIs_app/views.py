@@ -81,18 +81,28 @@ def edituser(request):
         messages.error(request, "You need to register or log in!")
         return redirect('/')
     context = {
-        "user": User.objects.get(id=id),
-        'current_page': "inventory",
+        "user": User.objects.get(id=request.session['user_id']),
+        'current_page': "dashboard",
     }
-    return render(request, 'edituser.html', context)
+    return render(request, 'editprofile.html', context)
+
+def viewuser(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "You need to register or log in!")
+        return redirect('/')
+    context = {
+        "user": User.objects.get(id=request.session['user_id']),
+        'current_page': "dashboard",
+    }
+    return render(request, 'editprofile.html', context)
 
 def updateuser(request):
     if request.method == "POST":
-        # errors = User.objects.update_validator(request.POST)
-        # if len(errors) > 0:
-        #     for key, value in errors.items():
-        #         messages.error(request, value)
-        #     return redirect('/user/edituser/')
+        errors = User.objects.update_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('/user/edituser/')
         hashed_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
         user_to_update = User.objects.get(id=request.session['user_id'])
         user_to_update.first_name = request.POST['first_name']

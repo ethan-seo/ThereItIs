@@ -3,7 +3,7 @@ from .forms import ItemForm
 from .models import *
 from django.contrib import messages
 import bcrypt
-
+import datetime as dt
 # Create your views here.
 
 def index(request):
@@ -58,10 +58,14 @@ def dashboard(request):
     if 'user_id' not in request.session:
         messages.error(request, "You need to register or log in!")
         return redirect('/')
+    upper = 10
+    lower = 5
     context = {
         'user': User.objects.get(id=request.session['user_id']),
         'all_items': Item.objects.all(),
         'current_page': "dashboard",
+        'upper':upper,
+        'lower':lower,
     }
     return render(request, 'dashboard.html', context)
 
@@ -75,6 +79,20 @@ def inventory(request):
         'current_page': "inventory",
     }
     return render(request, 'main_inventory.html', context)
+
+def expiring(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "You need to register or log in!")
+        return redirect('/')
+    days_to_expiration = 31
+    expiring_items = Item.objects.filter(expiration_date__lte=dt.date.today() + dt.timedelta(days=31))
+
+    context = {
+        'user': User.objects.get(id=request.session['user_id']),
+        'expiring_items': expiring_items,
+        'current_page': "expiring",
+    }
+    return render(request, 'expiring.html', context)
 
 def edituser(request):
     if 'user_id' not in request.session:

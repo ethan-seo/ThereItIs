@@ -8,8 +8,11 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = ('mainimage','sku','productname','productdesc','quantity','location','expiration_date')
         labels = {
-            'mainimage':'Upload Image:','sku':'SKU:',
-            'productname':'Product Name:','productdesc':'Product Description:',
-            'quantity':'Quantitiy','location':'Location',
-            'expiration_date':'Expiration Date'
-            }
+            'mainimage':'Image:',
+            'sku':'SKU:',
+            'productname':'Product Name:',
+            'productdesc':'Product Description:',
+            'quantity':'Quantity:',
+            'location':'Location:',
+            'expiration_date':'Expiration Date:',
+        }

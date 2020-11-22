@@ -33,7 +33,9 @@
     text-align: center;
 }
 
-
+h1.inventory-label{
+	text-align: center;
+}
 /* NAVBAR CSS */
 
 body {

@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<p></p>
+
 <div class="mainheader">
     <h1>View Inventory</h1>
 </div>
@@ -26,7 +26,7 @@
                 <td>{{item.sku}}</td>
                 <td>{{item.productname}}</td>
                 <td>{{item.quantity}}</td>
-                <td>{{item.location}}</td>/
+                <td>{{item.location}}</td>
                 <td>
                     <a href="/item/edit/{{item.id}}">
                         <button class="btn btn-primary">Edit</button>

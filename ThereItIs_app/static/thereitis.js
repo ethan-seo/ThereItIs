@@ -1,17 +1,16 @@
-// DATA TABLE
+// FOR ALL DATA TABLES
 
-$(document).ready(function () {
-    $('#example').DataTable({
-        columnDefs: [{
-            orderable: false,
-            className: 'select-checkbox',
-            targets: 0
-        }],
-        select: {
-            style: 'os',
-            selector: 'td:first-child'
-        },
-        order: [[1, 'asc']]
-    });
-});
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "order": [[ 3, "desc" ]]
+    } );
+} );
+
+// FOR TABLE 2 ON DASHBOARD
+
+$(document).ready(function() {
+    $('#dash_table2').DataTable( {
+        "order": [[ 3, "desc" ]]
+    } );
+} );
 

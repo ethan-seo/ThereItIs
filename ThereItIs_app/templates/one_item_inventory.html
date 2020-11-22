@@ -131,24 +131,27 @@
             <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 {% for items in all_items %}
                 <thead>
-                    <tr>
-                        <th class="th-sm">Select</th>
-                        <th class="th-sm">SKU</th>
-                        <th class="th-sm">Product Name</th>
-                        <th class="th-sm">Quantity</th>
-                        <th class="th-sm">Location</th>
-                        <th class="th-sm">Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <tr>
+                <th class="th-sm">SKU</th>
+                <th class="th-sm">Product Name</th>
+                <th class="th-sm">Quantity</th>
+                <th class="th-sm">Location</th>
+                <th class="th-sm">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_items %}
+            <tr>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.sku}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.productname}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.quantity}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.location}}</a></td>
+                <td>
+                    <a href="/item/edit/{{item.id}}">
+                        <button class="btn btn-primary">Edit</button>
+                    </a>
+                </td>
+            </tr>
                 </tbody>
                 {% endfor %}
             </table>

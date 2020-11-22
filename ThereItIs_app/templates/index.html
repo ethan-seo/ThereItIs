@@ -63,6 +63,13 @@
                         <a href="/item/transactionpage" class="nav-item nav-link"><i class="fa fa-history"></i><span>
                                 Transactions</span></a>
                         {% endif %}
+                        {% if current_page == "expiring" %}
+                        <a href="/item/expiring" class="nav-item nav-link active">
+                            <i class="fa fa-calendar-times"></i><span>Expiring</span></a>
+                        {% else %}
+                        <a href="/item/expiring" class="nav-item nav-link">
+                            <i class="fa fa-calendar-times"></i><span>Expiring</span></a>
+                        {% endif %}
                         <div class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i
                                     class="fa fa-user-circle-o"></i><b class="caret"></b></a>
@@ -81,7 +88,7 @@
                 </div>
             </nav>
         </div>
-
+        <br>
         {%block content%}
 
         

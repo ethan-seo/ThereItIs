@@ -25,4 +25,5 @@ urlpatterns = [
     path('item/addstock/<int:id>', views.addstock),
     path('item/addstockpage/<int:id>', views.addstockpage),
     path('item/orderpagefilter',views.orderpagefilter),
+    path('item/expiring', views.expiring)
 ]

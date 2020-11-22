@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="mainheader">
-    <h1 class="page-title">New Item</h1>
+    <h1 class="page-title">Edit Item</h1>
     <br>
     <div class="col-6">
         <form action="/item/edit/{{item.id}}" method="POST" enctype="multipart/form-data">
@@ -10,6 +10,7 @@
             {% for field in form %}
             <div class="form-group row">
                 {{field.errors}}
+                
                 <label for="id_{{ field.name }}" class="col-3 col-form-label"> {{field.label}}</label>
                 <div class="col-9">
                     {{ field }}

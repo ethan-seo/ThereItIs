@@ -65,10 +65,10 @@
                         {% endif %}
                         {% if current_page == "expiring" %}
                         <a href="/item/expiring" class="nav-item nav-link active">
-                            <i class="fa fa-calendar-times"></i><span>Expiring</span></a>
+                            <i class="fa fa-clock-o"></i><span>Expiring</span></a>
                         {% else %}
                         <a href="/item/expiring" class="nav-item nav-link">
-                            <i class="fa fa-calendar-times"></i><span>Expiring</span></a>
+                            <i class="fa fa-clock-o"></i><span>Expiring</span></a>
                         {% endif %}
                         <div class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><i
@@ -93,7 +93,17 @@
 
         
         {% endblock %}
-        
+        <br>
+        <div>
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <p class="mb-1">© 2020, ThereItIs</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Privacy</a></li>
+                    <li class="list-inline-item"><a href="#">Terms</a></li>
+                    <li class="list-inline-item"><a href="#">Support</a></li>
+                </ul>
+            </footer>
+        </div>
 
     </div>
 

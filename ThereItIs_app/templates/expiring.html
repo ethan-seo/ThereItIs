@@ -16,18 +16,17 @@
                 <th class="th-sm">Product Name</th>
                 <th class="th-sm">Quantity</th>
                 <th class="th-sm">Location</th>
-                <th class="th-sm">Expiration Date</th>
                 <th class="th-sm">Edit</th>
             </tr>
         </thead>
         <tbody>
             {% for item in expiring_items %}
             <tr>
-                <td>{{item.sku}}</td>
-                <td>{{item.productname}}</td>
-                <td>{{item.quantity}}</td>
-                <td>{{item.location}}</td>
-                <td>{{item.expiration_date|date:'d M Y'}}</td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.sku}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.productname}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.quantity}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.location}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.expiration_date|date:'d M Y'}}</a></td>
                 <td>
                     <a href="/item/edit/{{item.id}}">
                         <button class="btn btn-primary">Edit</button>

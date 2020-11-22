@@ -23,4 +23,6 @@ urlpatterns = [
     path('item/viewitem/<int:id>', views.viewitem),
     # path('item/additem_form', views.additem_form),
     path('item/addstock/<int:id>', views.addstock),
+    path('item/addstockpage/<int:id>', views.addstockpage),
+    path('item/orderpagefilter',views.orderpagefilter),
 ]

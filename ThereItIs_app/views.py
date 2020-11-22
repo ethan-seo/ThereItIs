@@ -94,7 +94,7 @@ def viewuser(request):
         "user": User.objects.get(id=request.session['user_id']),
         'current_page': "dashboard",
     }
-    return render(request, 'editprofile.html', context)
+    return render(request, 'viewprofile.html', context)
 
 def updateuser(request):
     if request.method == "POST":
@@ -182,6 +182,17 @@ def orderpage(request):
     }
     return render(request, 'low_quant.html', context)
 
+def orderpagefilter(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "You need to register or log in!")
+        return redirect('/')
+    context = {
+        'user': User.objects.get(id=request.session['user_id']),
+        'all_items': Item.objects.all(),
+        'current_page': "order",
+    }
+    return render(request, 'low_quant.html', context)
+
 def transactionpage(request):
     if 'user_id' not in request.session:
         messages.error(request, "You need to register or log in!")
@@ -199,17 +210,21 @@ def deleteitem(request, id):
         item_to_delete.delete()
     return redirect('/item/viewitems')
 
+def addstockpage(request, id):
+    #validate user login
+    if 'user_id' not in request.session:
+        return redirect('/')
+    item = Item.objects.get(id=id)
+    context={
+        'item':item,
+    }
+    return render(request,"add_stock.html",context)
 
 def addstock(request, id):
     if request.method == "POST":
-        # errors = Item.objects.create_validator(request.POST)
-        # if len(errors) > 0:
-        #     for key, value in errors.items():
-        #         messages.error(request, value)
-        #     return redirect('/item/viewitems)
         current_item = Item.objects.get(id=id)
-        new_item = Item.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quanity=request.POST['quanity'], location=request.POST['location'])
-    return redirect('/item/edititem/'+str(id))
+        new_item = Item.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quantity=request.POST['quantity'], location=request.POST['location'])
+    return redirect('/item/inventory')
 
 
     #############DELETE######################

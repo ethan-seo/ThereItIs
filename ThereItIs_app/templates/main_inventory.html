@@ -1,15 +1,18 @@
 {% extends 'index.html' %}
 
 {% block content %}
+<p></p>
 <div class="mainheader">
     <h1>View Inventory</h1>
 </div>
 
+
 <div class="maininventorytable">
+
     <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
         <thead>
             <tr>
-                <!-- <th class="th-sm">Select</th> -->
                 <th class="th-sm">SKU</th>
                 <th class="th-sm">Product Name</th>
                 <th class="th-sm">Quantity</th>
@@ -20,7 +23,6 @@
         <tbody>
             {% for item in all_items %}
             <tr>
-                <!-- <td></td> -->
                 <td>{{item.sku}}</td>
                 <td>{{item.productname}}</td>
                 <td>{{item.quantity}}</td>
@@ -33,7 +35,7 @@
             </tr>
             {% endfor %}
         </tbody>
-        
+
     </table>
 </div>
 
@@ -44,38 +46,5 @@
 
 
 <br>
-<div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
-    <!-- product -->
-    <div class="product-content product-wrap clearfix">
-        <div class="row">
-            <div class="col-md-5 col-sm-12 col-xs-12">
-                <div class="product-image">
-                    <img src="" alt="product image" class="img-responsive">
-                </div>
-            </div>
-            <div class="col-md-7 col-sm-12 col-xs-12">
-                <div class="product-detail">
-                    <h5 class="name">
-                        <a href="#">
-                            Item Title
-                            <span>SKU: </span>
-                            <span>Location: </span>
-                            <span>Quantity: </span>
-                        </a>
-                    </h5>
-                </div>
-                <div class="description">
-                    <p>This is the product description </p>
-                </div>
-                <div class="product-info smart-form">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <a href="javascript:void(0);" class="btn btn-primary">Add Item</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card" style="width: 30rem;">
+        {% load static %}
+        
+        <img src="{% static 'media/Suspicious_puppy.png' %}" class="card-img-top" alt="profile_image">
+        <div class="card-body">
+            <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+            <p class="card-text">{{user.email}}</p>
+            <a href="/user/edituser" class="btn btn-secondary">Edit</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 from django.db import models
 import re
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -36,13 +38,24 @@ class UserManager(models.Manager):
             errors['email'] = "Account does not exist!"
         return errors
 
+# image_storage = FileSystemStorage(
+#     # Physical file location ROOT
+#     location=u'{0}/'.format(settings.MEDIA_ROOT),
+#     # Url for file
+#     base_url=u'{0}/'.format(settings.MEDIA_URL),
+# )
+
+# def image_directory_path(instance, filename):
+#     # file will be uploaded to MEDIA_ROOT/ThereItIs_app/static/media/<filename>
+#     # return u'media/{0}'.format(filename)
+#     return u'ThereItIs_app/static/media/{0}'.format(filename)
 
 class User(models.Model):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     email = models.CharField(max_length=50)
     password = models.TextField()
-    profile_image = models.ImageField(upload_to='ThereItIs_app/static/media/', blank=True)
+    profile_image = models.ImageField(upload_to='ThereItIs_app/static/media', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()

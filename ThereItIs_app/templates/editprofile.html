@@ -3,7 +3,7 @@
 {% block content %}
         <div class="editprofile">
             <h3>Edit Your Info {{user.first_name}}:</h3>
-            <form action="/customer/update/{{customer.id}}" method="POST">
+            <form action="/user/updateuser" method="POST">
                 {% csrf_token %}
                 {% if messages %}
                     {% for message in messages %}

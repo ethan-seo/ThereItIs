@@ -116,11 +116,11 @@ def viewuser(request):
 
 def updateuser(request):
     if request.method == "POST":
-        errors = User.objects.update_validator(request.POST)
-        if len(errors) > 0:
-            for key, value in errors.items():
-                messages.error(request, value)
-            return redirect('/user/edituser/')
+        # errors = User.objects.update_validator(request.POST)
+        # if len(errors) > 0:
+        #     for key, value in errors.items():
+        #         messages.error(request, value)
+        #     return redirect('/user/edituser/')
         hashed_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
         user_to_update = User.objects.get(id=request.session['user_id'])
         user_to_update.first_name = request.POST['first_name']

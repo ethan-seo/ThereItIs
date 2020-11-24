@@ -4,7 +4,7 @@
 <div class="mainheader">
     <h1 class="page-title">Edit Item</h1>
     <br>
-    <div class="col-6">
+    <div class="card card-body col-6">
         <form action="/item/edit/{{item.id}}" method="POST" enctype="multipart/form-data">
             {%csrf_token%}
             {% for field in form %}

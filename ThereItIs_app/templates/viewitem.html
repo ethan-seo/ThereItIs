@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="mainheader">
+    <h1 class="page-title">View Product</h1>
+    <br>
+    <div class="col-6">
+        <div class="form-group row">
+            <label for="fieldlabel"
+                class="col-sm-3 col-form-label col-form-label-md font-weight-bolder text-right">SKU:</label>
+            <p class="col-sm-7 col-form-label col-form-label-md font-weight-bolder text-left">{{item.sku}}</p>
+        </div>
+        <div class="form-group row">
+            <label for="fieldlabel"
+                class="col-sm-3 col-form-label col-form-label-md font-weight-bolder text-right">Product Name:</label>
+            <p class="col-sm-7 col-form-label col-form-label-md font-weight-bolder text-left">{{item.productname}}</p>
+        </div>
+        <div class="form-group row">
+            <label for="fieldlabel"
+                class="col-sm-3 col-form-label col-form-label-md font-weight-bolder text-right">Product
+                Description:</label>
+            <p class="col-sm-7 col-form-label col-form-label-md font-weight-bolder text-left">{{item.productdesc}}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -116,11 +116,11 @@ def viewuser(request):
 
 def updateuser(request):
     if request.method == "POST":
-        # errors = User.objects.update_validator(request.POST)
-        # if len(errors) > 0:
-        #     for key, value in errors.items():
-        #         messages.error(request, value)
-        #     return redirect('/user/edituser/')
+        errors = User.objects.update_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('/user/edituser/')
         hashed_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
         user_to_update = User.objects.get(id=request.session['user_id'])
         user_to_update.first_name = request.POST['first_name']
@@ -140,7 +140,14 @@ def add_item(request):
         form = ItemForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             print("Valid Form Saving")
-            form.save()
+            user = User.objects.get(id=request.session['user_id'])
+            newitem = form.save()
+            transaction = Transaction.objects.create(
+                transaction_type="Add New Item", 
+                update_user=user, 
+                updated_item=newitem,
+                item_sku=newitem.sku,
+                item_name=newitem.productname)
             return redirect('/item/inventory')
         else:
             print("Form is invalid")
@@ -218,15 +225,23 @@ def transactionpage(request):
     context = {
         'user': User.objects.get(id=request.session['user_id']),
         'all_items': Item.objects.all(),
+        'all_transactions': Transaction.objects.all(),
         'current_page': "transaction",
     }
     return render(request, 'transactions.html', context)
 
 def deleteitem(request, id):
-    if request.method == "POST":
-        item_to_delete = Item.objects.get(id=id)
-        item_to_delete.delete()
-    return redirect('/item/viewitems')
+    item_to_delete = Item.objects.get(id=id)
+    user = User.objects.get(id=request.session['user_id'])
+    print(item_to_delete)
+    transaction = Transaction.objects.create(
+    transaction_type="Remove", 
+        update_user=user, 
+        item_sku=item_to_delete.sku,
+        item_name=item_to_delete.productname)
+    print(transaction)
+    item_to_delete.delete()
+    return redirect('/item/inventory')
 
 def addstockpage(request, id):
     #validate user login
@@ -241,24 +256,14 @@ def addstockpage(request, id):
 def addstock(request, id):
     if request.method == "POST":
         current_item = Item.objects.get(id=id)
-        new_item = Item.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quantity=request.POST['quantity'], location=request.POST['location'])
-    return redirect('/item/inventory')
-
-
-    #############DELETE######################
-def updateitem(request, id):
-    if request.method == "POST":
-        # errors = Item.objects.create_validator(request.POST)
-        # if len(errors) > 0:
-        #     for key, value in errors.items():
-        #         messages.error(request, value)
-        #     return redirect('/item/edititem/'+str(id))
-        item_to_update = Item.objects.get(id=id)
-        item_to_update.sku = request.POST['sku']
-        item_to_update.productname = request.POST['productname']
-        item_to_update.productdesc = request.POST['productdesc']
-        item_to_update.quanity = request.POST['quanity']
-        item_to_update.location = request.POST['location']
-        item_to_update.save()
-    return redirect('/item/edititem/'+str(id))
-############DELETE###################
+        newitem = Item.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quantity=request.POST['quantity'], location=request.POST['location'])
+        user = User.objects.get(id=request.session['user_id'])
+        print(newitem)
+        transaction = Transaction.objects.create(
+            transaction_type="Add Stock", 
+            update_user=user, 
+            updated_item=newitem,
+            item_sku=newitem.sku,
+            item_name=newitem.productname)
+        print(transaction)
+    return redirect('/item/orderpage')

@@ -38,6 +38,24 @@ class UserManager(models.Manager):
             errors['email'] = "Account does not exist!"
         return errors
 
+    def update_validator(self, reqPOST):
+        errors = {}
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(reqPOST["email"]):
+            errors['regex'] = "Email is not in correct format"
+        email_check = self.filter(email = reqPOST['email'])
+        if len(email_check)==0:
+            errors['email'] = "Account does not exist!"
+        if len(reqPOST['first_name']) < 2:
+            errors["first_name"] = "First name should be at least 2 characters"
+        if len(reqPOST['last_name']) < 2:
+            errors["last_name"] = "Last name should be at least 2 characters"
+        if len(reqPOST['password']) < 8:
+            errors['password'] = "Passwords must be at least 8 characters"
+        if reqPOST['password'] != reqPOST['password_conf']:
+            errors['password_conf'] = "Passwords need to match"
+        return errors
+
 # image_storage = FileSystemStorage(
 #     # Physical file location ROOT
 #     location=u'{0}/'.format(settings.MEDIA_ROOT),
@@ -60,6 +78,9 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
+    def __str__(self):
+        return self.first_name + self.last_name 
+
 LOCATION_CHOICES = (("CA","CA"),("OH","OH"),("WA","WA"))
 
 class Item(models.Model):
@@ -76,13 +97,17 @@ class Item(models.Model):
     def __str__(self):
         return self.productname
 
-
-TRANSACTION_TYPE = (("ADD","ADD"),("REMOVE","REMOVE"))
+TRANSACTION_TYPE = (("Add New Item","Add New Item"),("Add Stock","Add Stock"),("Remove","Remove"))
 
 class Transaction(models.Model):
     notes = models.CharField(max_length=255,blank=True, null=True)
     transaction_type = models.CharField(max_length=50, choices=TRANSACTION_TYPE,blank=True)
+    item_sku = models.CharField(max_length=50, blank=True)
+    item_name = models.CharField(max_length=50, blank=True)
     update_user = models.ForeignKey(User, related_name='transaction_user', on_delete=models.CASCADE)
-    updated_item = models.ForeignKey(Item, related_name="transaction_item", on_delete=models.CASCADE)
+    updated_item = models.ForeignKey(Item, related_name="transaction_item", null=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.item_name + "_" + self.transaction_type

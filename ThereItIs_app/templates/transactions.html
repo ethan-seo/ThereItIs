@@ -12,23 +12,24 @@
             <tr>
                 <th class="th-sm">SKU</th>
                 <th class="th-sm">Product Name</th>
-                <th class="th-sm">Quantity</th>
-                <th class="th-sm">Location</th>
-                <th class="th-sm">Edit</th>
+                <th class="th-sm">Transaction Type</th>
+                <th class="th-sm">Update User</th>
+                <th class="th-sm">Date</th>
             </tr>
         </thead>
         <tbody>
-            {% for item in all_items %}
+            {% for transaction in all_transactions %}
             <tr>
-                <td><a href="/item/viewitem/{{item.id}}">{{item.sku}}</a></td>
-                <td><a href="/item/viewitem/{{item.id}}">{{item.productname}}</a></td>
-                <td><a href="/item/viewitem/{{item.id}}">{{item.quantity}}</a></td>
-                <td><a href="/item/viewitem/{{item.id}}">{{item.location}}</a></td>
-                <td>
-                    <a href="/item/edit/{{item.id}}">
-                        <button class="btn btn-primary">Edit</button>
-                    </a>
-                </td>
+                {% if transaction.updated_item %}
+                <td><a href="/item/viewitem/{{transaction.updated_item.id}}">{{transaction.item_sku}}</a></td>
+                <td><a href="/item/viewitem/{{transaction.updated_item.id}}">{{transaction.item_name}}</a></td>
+                {% else %}
+                <td><p>{{transaction.item_sku}}</a></td>
+                <td><p>{{transaction.item_name}}</a></td>
+                {% endif %}
+                <td><p>{{transaction.transaction_type}}</p></td>
+                <td><p>{{transaction.update_user}}</p></td>
+                <td><p>{{transaction.created_at}}</p></td>
             </tr>
             {% endfor %}
         </tbody>

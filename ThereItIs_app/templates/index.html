@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory</title>
+    <title>ThereItIs</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <!-- <link href="static/bootstrap.min.css" rel="stylesheet"> -->
@@ -28,12 +28,6 @@
                 </button>
                 <!-- Collection of nav links, forms, and other content for toggling -->
                 <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-                    <form class="navbar-form form-inline">
-                        <div class="input-group search-box">
-                            <input type="text" id="search" class="form-control" placeholder="Search here...">
-                            <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-                        </div>
-                    </form>
                     <div class="navbar-nav ml-auto">
                         {% if current_page == "dashboard" %}
                         <a href="/user/dashboard" class="nav-item nav-link active"><i

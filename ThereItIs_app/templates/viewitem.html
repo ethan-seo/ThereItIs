@@ -1,26 +1,40 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div class="mainheader">
-    <h1 class="page-title">View Product</h1>
-    <br>
-    <div class="col-6">
-        <div class="form-group row">
-            <label for="fieldlabel"
-                class="col-sm-3 col-form-label col-form-label-md font-weight-bolder text-right">SKU:</label>
-            <p class="col-sm-7 col-form-label col-form-label-md font-weight-bolder text-left">{{item.sku}}</p>
-        </div>
-        <div class="form-group row">
-            <label for="fieldlabel"
-                class="col-sm-3 col-form-label col-form-label-md font-weight-bolder text-right">Product Name:</label>
-            <p class="col-sm-7 col-form-label col-form-label-md font-weight-bolder text-left">{{item.productname}}</p>
-        </div>
-        <div class="form-group row">
-            <label for="fieldlabel"
-                class="col-sm-3 col-form-label col-form-label-md font-weight-bolder text-right">Product
-                Description:</label>
-            <p class="col-sm-7 col-form-label col-form-label-md font-weight-bolder text-left">{{item.productdesc}}</p>
+<br>
+<div class="itemdisplay1">
+    <!-- <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys"> -->
+        <div class="product-content product-wrap clearfix">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    <div class="product-image">
+                        <img src="" alt="product image" class="img-responsive">
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                    <div class="product-detail">
+                        <h5 class="name">
+                            <h3>{{item.productname}}</h3>
+                            <br>
+                            <p>SKU: {{item.sku}}</p>
+                            <p>Location: {{item.location}}</p>
+                            <p>Quantity: {{item.quantity}}</p>
+                        </h5>
+                    </div>
+                    <div class="description">
+                        <p>Product Description: {{item.productdesc}} </p>
+                    </div>
+                    <!-- <div class="product-info smart-form">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <a href="javascript:void(0);" class="btn btn-primary">Add Item</a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

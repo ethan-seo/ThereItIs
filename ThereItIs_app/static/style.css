@@ -205,6 +205,11 @@ body {
 }
 
 /* ONE ITEM DISPLAY */
+.itemdisplay1{
+	width: 70%;
+	margin-left: 170px;
+}
+
 
 body{
     margin-top:20px;
@@ -215,9 +220,9 @@ body{
     border: 2px solid #dfe5e9;
     margin-bottom: 20px;
     margin-top: 12px;
-    background: #fff;
+    background: rgb(255, 255, 255);
     padding: 4px;
-        -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
     box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
 }
 
@@ -227,7 +232,8 @@ body{
     min-height: 238px;
     overflow: hidden;
     position: relative;
-    height: 238px;
+	height: 238px;
+	margin-left: 200px;
 }
 
 .product-content .product-detail {
@@ -239,8 +245,8 @@ body{
     background: #fff
 }
 
-.product-content .product-detail h5 a {
-    color: #2f383d;
+.product-content .product-detail h5 h3 {
+    color: #3e4447;
     font-size: 15px;
     line-height: 19px;
     text-decoration: none;
@@ -248,8 +254,8 @@ body{
     margin-left: 0
 }
 
-.product-content .product-detail h5 a span {
-    color: #9aa7af;
+.product-content .product-detail h5 p {
+    color: #6d7479;
     display: block;
     font-size: 13px
 }
@@ -257,53 +263,38 @@ body{
 .product-content .description {
     font-size: 12.5px;
     line-height: 20px;
-    padding: 10px 14px 16px 19px;
+    padding: 10px 14px 5px 19px;
     background: #fff
 }
 
-.product-content .product-info {
+/* .product-content .product-info {
     padding: 11px 19px 10px 20px
-}
+} */
 
-.product-content .product-info a.add-to-cart {
-    color: #2f383d;
-    font-size: 13px;
-    padding-left: 16px
-}
-
-.product-content name.a {
-    padding: 5px 10px;
-    margin-left: 16px
-}
-
-.product-info.smart-form .btn {
+/* .product-info.smart-form .btn {
     padding: 6px 12px;
     margin-left: 12px;
     margin-top: -10px
-}
-
-.product-info.smart-form .rating label {
-    margin-top: 0
-}
+} */
 
 .product-detail {
     padding: 30px 30px 50px
 }
 
 .product-detail .product-image {
-    border-right: 0px solid #fff !important
+    border-right: 0px solid #fff !important;
 }
 
 .product-detail .name {
     margin-top: 0;
-    margin-bottom: 0
+    margin-bottom: 0;
 }
 
 .product-detail .name small {
     display: block
 }
 
-.product-detail .name a {
+.product-detail .name p {
     margin-left: 0
 }
 

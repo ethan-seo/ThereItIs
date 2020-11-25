@@ -94,9 +94,9 @@
                 <div class="row">
                     <div class="col-md-5 col-sm-12 col-xs-12">
                         <div class="product-image">
-                            <img src="https://via.placeholder.com/194x228/87CEFA" alt="194x228" class="img-responsive">
+                            <img src="{{ item.mainimage }}" alt="194x228" class="img-responsive">
                             <span class="tag2 hot">
-                                HOT
+                                
                             </span>
                         </div>
                     </div>
@@ -104,21 +104,21 @@
                         <div class="product-detail">
                             <h5 class="name">
                                 <a href="#">
-                                    Item Title <span>Category</span>
+                                    {{ item.productname }} <span>{{ item.sku }}</span>
                                 </a>
                             </h5>
                             <p class="price-container">
-                                <span>$99</span>
+                                <span>{{ item.quantity }} </span>
                             </p>
                             <!-- <span class="tag1"></span> -->
                         </div>
                         <div class="description">
-                            <p>Proin in ullamcorper lorem. Maecenas eu ipsum </p>
+                            <p>{{ item.productdesc }} </p>
                         </div>
                         <div class="product-info smart-form">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <a href="javascript:void(0);" class="btn btn-success">Add Item</a>
+                                    <a href="/item/edit/{{item.id}}" class="btn btn-success">Edit Item</a>
                                 </div>
                             </div>
                         </div>
@@ -129,93 +129,59 @@
 
         <div class="maininventorytable">
             <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                {% for items in all_items %}
                 <thead>
-            <tr>
-                <th class="th-sm">SKU</th>
-                <th class="th-sm">Product Name</th>
-                <th class="th-sm">Quantity</th>
-                <th class="th-sm">Location</th>
-                <th class="th-sm">Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in all_items %}
-            <tr>
-                <td><a href="/item/viewitem/{{item.id}}">{{item.sku}}</a></td>
-                <td><a href="/item/viewitem/{{item.id}}">{{item.productname}}</a></td>
-                <td><a href="/item/viewitem/{{item.id}}">{{item.quantity}}</a></td>
-                <td><a href="/item/viewitem/{{item.id}}">{{item.location}}</a></td>
-                <td>
-                    <a href="/item/edit/{{item.id}}">
-                        <button class="btn btn-primary">Edit</button>
-                    </a>
-                </td>
-            </tr>
+                    <tr>
+                        <th class="th-sm">SKU</th>
+                        <th class="th-sm">Product Name</th>
+                        <th class="th-sm">Quantity</th>
+                        <th class="th-sm">Location</th>
+                        <th class="th-sm">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in all_items %}
+                    <tr>
+                        <td><a href="/item/viewitem/{{item.id}}">{{item.sku}}</a></td>
+                        <td><a href="/item/viewitem/{{item.id}}">{{item.productname}}</a></td>
+                        <td><a href="/item/viewitem/{{item.id}}">{{item.quantity}}</a></td>
+                        <td><a href="/item/viewitem/{{item.id}}">{{item.location}}</a></td>
+                        <td>
+                            <a href="/item/edit/{{item.id}}">
+                                <button class="btn btn-primary">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
-                {% endfor %}
             </table>
         </div>
 
         <br>
-        <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
-            <!-- product -->
-            <div class="product-content product-wrap clearfix">
-                <div class="row">
-                    <div class="col-md-5 col-sm-12 col-xs-12">
-                        <div class="product-image">
-                            <img src="" alt="product image" class="img-responsive">
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-sm-12 col-xs-12">
-                        <div class="product-detail">
-                            <h5 class="name">
-                                <a href="#">
-                                    Item Title 
-                                    <span>SKU: </span>
-                                    <span>Location: </span>
-                                    <span>Quantity: </span>
-                                </a>
-                            </h5>
-                        </div>
-                        <div class="description">
-                            <p>This is the product description </p>
-                        </div>
-                        <div class="product-info smart-form">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                    <a href="javascript:void(0);" class="btn btn-primary">Add Item</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
     </div>
 
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-            crossorigin="anonymous"></script>
-        <script src="{% static 'thereitis.js' %}"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'thereitis.js' %}"></script>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="static/bootstrap.min.js"></script>
-        <!-- FOR DATA TABLES -->
-        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
-        <!--END OF DATA TABLE PLUG-INS-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="static/bootstrap.min.js"></script>
+    <!-- FOR DATA TABLES -->
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <!--END OF DATA TABLE PLUG-INS-->
 </body>
 
 </html>

@@ -3,13 +3,19 @@
 {% block content %}
         <div class="editprofile">
             <h3>Edit Your Info {{user.first_name}}:</h3>
-            <form action="/user/updateuser" method="POST">
+            <form action="/user/updateuser" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% if messages %}
                     {% for message in messages %}
                         <p class="text-danger small" id="errors">{{ message }}</p>
                     {% endfor %}
                 {% endif %}
+                <div class="form-group row">
+                    <label for="profile_image" class="col-sm-5 col-form-label col-form-label-sm">Profile Picture:</label>
+                    <div class="col-sm-7">
+                        <input type="file" class="form-control form-control-sm" name="profile_image" value="{{user.profile_image}}">
+                    </div>
+                </div>
                 <div class="form-group row">
                     <label for="phonenumberinput" class="col-sm-5 col-form-label col-form-label-sm">First Name:</label>
                     <div class="col-sm-7">

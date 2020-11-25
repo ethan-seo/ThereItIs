@@ -7,8 +7,9 @@
         <div class="product-content product-wrap clearfix">
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
-                    <div class="product-image">
-                        <img src="" alt="product image" class="img-responsive">
+                    <div class="product-image text-center">
+                        <img src="{{ item.mainimage }}" alt="product image" class="img-responsive" style="width: 400px">
+
                     </div>
                 </div>
                 <div class="col-md-7 col-sm-12 col-xs-12">
@@ -35,6 +36,8 @@
             </div>
         </div>
     </div>
+    <a href="/item/edit/{{item.id}}">
+        <button class="btn btn-primary float-right">Edit Item</button>
+    </a>
 </div>
-
 {% endblock %}

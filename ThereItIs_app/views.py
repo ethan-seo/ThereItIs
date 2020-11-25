@@ -4,6 +4,7 @@ from .models import *
 from django.contrib import messages
 import bcrypt
 import datetime as dt
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
 def index(request):
@@ -115,20 +116,28 @@ def viewuser(request):
     return render(request, 'viewprofile.html', context)
 
 def updateuser(request):
+    if 'user_id' not in request.session:
+        messages.error(request, "You need to register or log in!")
+        return redirect('/')
     if request.method == "POST":
         errors = User.objects.update_validator(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
-            return redirect('/user/edituser/')
+            return redirect('/user/edituser')
         hashed_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
         user_to_update = User.objects.get(id=request.session['user_id'])
+        pic = request.FILES['profile_image']
+        fs = FileSystemStorage()
+        user_pic = fs.save(pic.name, pic)
+        user_pic_url = fs.url(user_pic)
+        user_to_update.profile_image = user_pic_url
         user_to_update.first_name = request.POST['first_name']
         user_to_update.last_name = request.POST['last_name']
         user_to_update.email = request.POST['email']
         user_to_update.password = hashed_pw
         user_to_update.save()
-    return redirect('/user/edituser')
+    return redirect('/user/viewuser')
 
 def add_item(request):
     #validate user login
@@ -168,13 +177,26 @@ def edit_item(request, id):
     if len(item_exists)>0:
         item = Item.objects.get(id=id)
         # save updates to item
+        print("edit item 1")
         if request.method == "POST":
             form = ItemForm(request.POST, request.FILES, instance=item)
+            print("edit item 2")
+            pic = request.FILES['mainimage']
+            
             if form.is_valid():
                 form.save()
-                return redirect('/item/inventory')
+                fs = FileSystemStorage()
+                item_pic = fs.save(pic.name, pic)
+                item_pic_url = fs.url(item_pic)
+                print(item)
+                item.mainimage = item_pic_url
+                item.save()
+                print("edit 3")
+                return redirect(f'/item/viewitem/{id}')
             else:
-                return redirect(f'item/edit/{id}')
+                print("edit 4")
+                print(f'item/edit/{id}')
+                return redirect(f'/item/edit/{id}')
         else:
             form = ItemForm(instance=item)
             context = {
@@ -196,6 +218,7 @@ def viewitem(request, id):
             "user": User.objects.get(id=request.session['user_id']),
             'current_page': "inventory",
             'item':item,
+            'all_items': Item.objects.all(),
         }
         return render(request,'viewitem.html',context)
     return redirect('/user/dashboard')
@@ -237,7 +260,6 @@ def transactionpage(request):
 def deleteitem(request, id):
     item_to_delete = Item.objects.get(id=id)
     user = User.objects.get(id=request.session['user_id'])
-    print(item_to_delete)
     transaction = Transaction.objects.create(
     transaction_type="Remove", 
         update_user=user, 
@@ -262,7 +284,6 @@ def addstock(request, id):
         current_item = Item.objects.get(id=id)
         newitem = Item.objects.create(sku=current_item.sku, productname=current_item.productname, productdesc=current_item.productdesc, quantity=request.POST['quantity'], location=request.POST['location'])
         user = User.objects.get(id=request.session['user_id'])
-        print(newitem)
         transaction = Transaction.objects.create(
             transaction_type="Add Stock", 
             update_user=user, 

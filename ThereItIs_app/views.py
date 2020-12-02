@@ -181,16 +181,18 @@ def edit_item(request, id):
         if request.method == "POST":
             form = ItemForm(request.POST, request.FILES, instance=item)
             print("edit item 2")
-            pic = request.FILES['mainimage']
-            
+            print(form)
+            if (request.FILES['mainimage']):
+                pic = request.FILES['mainimage']
             if form.is_valid():
                 form.save()
-                fs = FileSystemStorage()
-                item_pic = fs.save(pic.name, pic)
-                item_pic_url = fs.url(item_pic)
-                print(item)
-                item.mainimage = item_pic_url
-                item.save()
+                if (pic):
+                    fs = FileSystemStorage()
+                    item_pic = fs.save(pic.name, pic)
+                    item_pic_url = fs.url(item_pic)
+                    print(item)
+                    item.mainimage = item_pic_url
+                    item.save()
                 print("edit 3")
                 return redirect(f'/item/viewitem/{id}')
             else:

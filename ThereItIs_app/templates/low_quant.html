@@ -20,10 +20,10 @@
             {% for item in all_items %}
             {% if item.quantity < 10 %}
             <tr>
-                <td>{{item.sku}}</td>
-                <td>{{item.productname}}</td>
-                <td>{{item.quantity}}</td>
-                <td>{{item.location}}</td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.sku}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.productname}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.quantity}}</a></td>
+                <td><a href="/item/viewitem/{{item.id}}">{{item.location}}</a></td>
                 <td>
                     <a href="/item/edit/{{item.id}}">
                         <button class="btn btn-primary">Edit</button>
